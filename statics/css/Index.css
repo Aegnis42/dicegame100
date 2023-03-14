@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    text-shadow: white 0px 0px 4px ;
 }
 body{
     background: url(../assets/img/peakpx.jpg);
@@ -9,13 +10,15 @@ body{
 
 }
 header h1{
-    color: aqua;
-    font-size: 5vw;
+    color: rgb(202, 145, 255);
+    font-size: 4.5vw;
+    text-shadow: rgb(171, 81, 255) 0px 0px 1vw ;
 }
 header h2{
-    color: blueviolet;
+    color: rgb(202, 145, 255);
     font-size: 2vw;
-    margin-top: 1vw;
+    margin-top: 0.8vw;
+    text-shadow: rgb(171, 81, 255) 0px 0px 0.8vw ;
 }
 header div{
     display: flex;
@@ -26,6 +29,7 @@ header div{
 header div h3{
     color: azure;
     margin-right: 0.5vw;
+    text-shadow: rgb(171, 81, 255) 0px 0px 0vw ;
 }
 
 button{
@@ -37,7 +41,8 @@ button{
     font-size: 1.5vw;
     font-weight: bold;
     border-radius: 20px;
-    margin: 1vw 0;
+    margin: 0.8vw 0;
+    text-shadow: rgb(171, 81, 255) 0px 0px 0vw ;
 }
 button:active{
    background-color: rgba(0, 0, 0, 0.39);
@@ -50,10 +55,31 @@ main{
     flex-wrap: wrap;
 }
 main h4{
-    color: purple;
+    color: rgb(202, 145, 255);
+    font-size: 1.5vw;
+    text-shadow: rgb(171, 81, 255) 0px 0px 0.2vw ;
 }
-main div div{
+.diceZone{
+    margin-top: 1vw;
     width: 200px;
     height: 200px;
     border: 2px solid purple;
+}
+p{
+    color:azure;
+    margin-top: 0.3vw;
+    font-weight: bold;
+    font-size: 1.1vw;
+}
+footer p{
+    margin-right: 5px;
+}
+footer h4{
+    color: rgb(202, 145, 255);
+    font-size: 1.5vw;
+    text-shadow: rgb(171, 81, 255) 0px 0px 0.5vw ;
+}
+footer div{
+    display: flex;
+    justify-content: center;
 }

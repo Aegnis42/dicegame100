@@ -13,22 +13,38 @@
     <header>
         <h1>Dice Game</h1>
         <h2>Who will reach 100 first?</h2>
-        <div><h3>player 1 :</h3><input type="text" id="playerOne"></div>
-        <div><h3>player 2 :</h3> <input type="text" id="PlayerTwo"></div>
+        <div><h3>Player 1 :</h3><input type="text" id="playerOneName"></div>
+        <div><h3>Player 2 :</h3> <input type="text" id="PlayerTwoName"></div>
         <button>start game</button>
     </header>
     <main>
-        <div><h4>Player 1 dice</h4>
-        <div id="diceOne"></div>
-        <button id="diceOneBtn">Roll dice</button></div>
-        <div><h4>Player 2 dice</h4>
-        <div id="diceTwo"></div>
-        <button id="diceTwoBtn">Roll dice</button></div>
+        <div>
+            <h4>Player 1 dice</h4>
+            <div id="diceOne" class="diceZone"></div>
+            <button id="diceOneBtn" >Roll dice</button>
+            <div>
+                <h4>Pending points</h4>
+                <p>0</p>
+            </div>
+            <button id="diceOneBtn">Stock points</button>
+            <p>0</p>
+        </div>
+        <div>
+            <h4>Player 2 dice</h4>
+            <div id="diceTwo" class="diceZone"></div>
+            <button id="diceTwoBtn">Roll dice</button>
+            <div>
+                <h4>Pending points</h4>
+                <p>0</p>
+            </div>
+            <button id="stocckPointsBtn">Stock points</button>
+            <p>0</p>
+        </div>
     </main>
     <footer>
         <h4>Number of wins</h4>
-        <div><p>Player 1</p> <p id="scorpPlayerOne"></p></div>
-        <div><p>Player 2</p> <p id="scorpPlayerTwo"></p></div>
+        <div><p>Player 1 :</p> <p id="scorpPlayerOne">0</p></div>
+        <div><p>Player 2 :</p> <p id="scorpPlayerTwo">0</p></div>
         
     </footer>
 </body>
