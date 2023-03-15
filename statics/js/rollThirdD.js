@@ -1,78 +1,132 @@
-const diceList = document.getElementsByClassName('dice');
-const rollBtnList = document.getElementsByClassName('roll');
-const pendingPointsList = document.getElementsByTagName('p');
-const stockPointsBtnList = document.getElementsByTagName('button');
+const dice = document.querySelector('.dice');
+const rollBtn = document.querySelector('.roll');
+const startBtn = document.querySelector('#startBtn');
+const container = document.querySelector('.container');
+const currentPlayer = document.querySelector('#currentPlayer');
+const playerOneName = document.querySelector('#playerOneName');
+const playerTwoName = document.querySelector('#playerTwoName');
+const pendingPointsOne = document.querySelector('#pendingPointsOne');
+const stockPointsBtnOne = document.querySelector('#stockPointsBtnOne');
+const currentScoreOne = document.querySelector('#currentScoreOne');
+const pendingPointsTwo = document.querySelector('#pendingPointsTwo');
+const stockPointsBtnTwo = document.querySelector('#stockPointsBtnTwo');
+const currentScoreTwo = document.querySelector('#currentScoreTwo');
+const scoreWinPlayerOne = document.querySelector('#scoreWinPlayerOne');
+const scoreWinPlayerTwo = document.querySelector('#scoreWinPlayerTwo');
 
-let activePlayer = 0; 
+const playerNames = [playerOneName, playerTwoName];
 
-const randomDice = (diceIndex) => {
-    const random = Math.floor(Math.random() * 10);
+let currentPlayerIndex = 0;
+let currentPendingPoints = 0;
+let currentScore = [0, 0];
+let wins = [0, 0];
 
-    if (random >= 1 && random <= 6) {
-        rollDice(random, diceIndex);
+const updatePendingPoint = () => {
+  const pendingPoints = currentPlayerIndex === 0 ? pendingPointsOne : pendingPointsTwo;
+  pendingPoints.textContent = currentPendingPoints;
+};
+
+const switchPlayer = () => {
+    currentPendingPoints = 0;
+    updatePendingPoint();
+    currentScore[currentPlayerIndex] += currentPendingPoints;
+    currentPendingPoints = 0;
+    currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+    currentPlayer.textContent = `${playerNames[currentPlayerIndex].value}'s turn`;
+    currentScoreOne.textContent = currentScore[0];
+    currentScoreTwo.textContent = currentScore[1];
+    if (currentScore[(currentPlayerIndex + 1) % 2] >= 100) {
+      wins[(currentPlayerIndex + 1) % 2]++;
+      const scoreWinEl = (currentPlayerIndex + 1) % 2 === 0 ? scoreWinPlayerOne : scoreWinPlayerTwo;
+      scoreWinEl.textContent = wins[(currentPlayerIndex + 1) % 2];
+      currentScoreEl = currentPlayerIndex === 0 ? currentScoreOne : currentScoreTwo;
+      currentScoreEl.textContent = currentScore[currentPlayerIndex];
+
+      resetGame();
     }
-    else {
-        randomDice(diceIndex);
-    }
+  };
+
+function resetGame() {
+    currentPendingPoints = 0;
+    updatePendingPoint();
+    currentScore = [0, 0];
+    currentPlayerIndex = 0;
+    currentPlayer.textContent = `${playerNames[currentPlayerIndex].value}'s turn`;
+    currentScoreOne.textContent = currentScore[0];
+    currentScoreTwo.textContent = currentScore[1];
+    wins = [0, 0];
+    scoreWinPlayerOne.textContent = wins[0];
+    scoreWinPlayerTwo.textContent = wins[1];
+
+    scoreWinPlayerOne.textContent = wins[0];
+    scoreWinPlayerTwo.textContent = wins[1];
 }
-const rollDice = (random, diceIndex) => {
-    const dice = diceList[diceIndex];
 
-    dice.style.animation = 'rolling 4s';
+const rollDice = () => {
+  const random = Math.floor(Math.random() * 6) + 1;
 
-    setTimeout(() => {
+  dice.style.animation = 'rolling 4s';
 
-        switch (random) {
-            case 1:
+  setTimeout(() => {
+
+      switch (random) {
+          case 1:
                 dice.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                break;
+                switchPlayer();
+              break;
 
-            case 6:
+          case 6:
                 dice.style.transform = 'rotateX(180deg) rotateY(0deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            case 2:
+          case 2:
                 dice.style.transform = 'rotateX(-90deg) rotateY(0deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            case 5:
+          case 5:
                 dice.style.transform = 'rotateX(90deg) rotateY(0deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            case 3:
+          case 3:
                 dice.style.transform = 'rotateX(0deg) rotateY(90deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            case 4:
+          case 4:
                 dice.style.transform = 'rotateX(0deg) rotateY(-90deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            default:
-                break;
-        }
+          default:
+              break;
+      }
 
-        dice.style.animation = 'none';
+      dice.style.animation = 'none';
+    
+}, 4050);
+};
 
-        // Update the current score and pending points
-        const currentScore = getCurrentScore();
-        const pendingPoints = getCurrentPendingPoints();
+const updatePendingPoints = () => {
+const pendingPoints = currentPlayerIndex === 0 ? pendingPointsOne : pendingPointsTwo;
+pendingPoints.textContent = currentPendingPoints;
+};
 
-        if (random === 1) {
-            // The active player rolled a 1, switch to the other player
-            currentPlayer = currentPlayer === 1 ? 2 : 1;
-            updateCurrentScore(0);
-            updatePendingPoints(0);
-        } else {
-            // Add the random number to the pending points
-            const newPendingPoints = pendingPoints + random;
-            updatePendingPoints(newPendingPoints);
-        }
-    }, 4050);
-}
-for(let i = 0; i < rollBtnList.length; i++) {
-    rollBtnList[i].addEventListener('click', () => {
-        if (activePlayer === i) {
-            randomDice(i);
-        }
-    });
-}
+const holdPoints = () => {
+currentScore[currentPlayerIndex] += currentPendingPoints;
+const currentScoreEl = currentPlayerIndex === 0 ? currentScoreOne : currentScoreTwo;
+currentScoreEl.textContent = currentScore[currentPlayerIndex];
+switchPlayer();
+};
+
+rollBtn.addEventListener('click', rollDice);
+startBtn.addEventListener('click', resetGame);
+stockPointsBtnOne.addEventListener('click', holdPoints);
+stockPointsBtnTwo.addEventListener('click', holdPoints);
