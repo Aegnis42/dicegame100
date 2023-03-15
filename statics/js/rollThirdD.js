@@ -15,7 +15,6 @@ const randomDice = (diceIndex) => {
         randomDice(diceIndex);
     }
 }
-
 const rollDice = (random, diceIndex) => {
     const dice = diceList[diceIndex];
 
@@ -54,9 +53,22 @@ const rollDice = (random, diceIndex) => {
 
         dice.style.animation = 'none';
 
+        // Update the current score and pending points
+        const currentScore = getCurrentScore();
+        const pendingPoints = getCurrentPendingPoints();
+
+        if (random === 1) {
+            // The active player rolled a 1, switch to the other player
+            currentPlayer = currentPlayer === 1 ? 2 : 1;
+            updateCurrentScore(0);
+            updatePendingPoints(0);
+        } else {
+            // Add the random number to the pending points
+            const newPendingPoints = pendingPoints + random;
+            updatePendingPoints(newPendingPoints);
+        }
     }, 4050);
 }
-
 for(let i = 0; i < rollBtnList.length; i++) {
     rollBtnList[i].addEventListener('click', () => {
         if (activePlayer === i) {

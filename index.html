@@ -14,12 +14,11 @@
         <h1>Dice Game</h1>
         <h2>Who will reach 100 first?</h2>
         <div><h3>Player 1 :</h3><input type="text" id="playerOneName"></div>
-        <div><h3>Player 2 :</h3> <input type="text" id="PlayerTwoName"></div>
-        <button>start game</button>
+        <div><h3>Player 2 :</h3> <input type="text" id="playerTwoName"></div>
+        <button id="startBtn">Start game</button>
     </header>
     <main>
         <div class="container">
-        
             <div class="dice">
                 <div class="face front"></div>
                 <div class="face back"></div>
@@ -28,41 +27,30 @@
                 <div class="face right"></div>
                 <div class="face left"></div>
             </div>
-    
-            <button class="roll">
+            <button id="rollBtn" class="roll">
                 Roll Dice
             </button>
-            <div>
-                <h4>Pending points</h4>
-                <p id="pendingPointsOne">0</p>
-            </div>
-            <button id="diceOneBtn">Stock points</button>
-            <p id="currentScoreOne">0</p>
-            
         </div>
-        <h3></h3>
-        <div class="container">
-        
-            <div class="dice">
-                <div class="face front"></div>
-                <div class="face back"></div>
-                <div class="face top"></div>
-                <div class="face bottom"></div>
-                <div class="face right"></div>
-                <div class="face left"></div>
-            </div>
-    
-            <button class="roll">
-                Roll Dice
-            </button>
-            
+        <h3 id="currentPlayer"></h3>
+        <section>
             <div>
-                <h4>Pending points</h4>
-                <p id="pendingPointsTwo">0</p>
+                <div>
+                    <h4>Pending points</h4>
+                    <p id="pendingPointsOne">0</p>
+                </div>
+                <button id="stockPointsBtnOne">Stock points</button>
+                <p id="currentScoreOne">0</p>
             </div>
-            <button id="stocckPointsBtn">Stock points</button>
-            <p id="currentScoreTwo">0</p>
-        </div>
+                <div>
+                    <div>
+                        <h4>Pending points</h4>
+                        <p id="pendingPointsTwo">0</p>
+                    </div>
+                    <button id="stockPointsBtnTwo">Stock points</button>
+                    <p id="currentScoreTwo">0</p>
+                </div>
+        </section>
+
 
     </main>
     <footer>
@@ -71,7 +59,7 @@
         <div><p>Player 2 :</p> <p id="scoreWinPlayerTwo">0</p></div>
         
     </footer>
+    <script src="statics/js/rollThirdD.js" type="text/javascript"></script>
+    <script src="statics/js/currentpoints.js" type="text/javascript"></script>
 </body>
-<script src="statics/js/rollThirdD.js" type="text/javascript"></script>
-<script src="statics/js/currentpoints.js" type="text/javascript"></script>
 </html>
