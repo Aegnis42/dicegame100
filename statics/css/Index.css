@@ -12,7 +12,7 @@ body{
 }
 header h1{
     color: rgb(202, 145, 255);
-    font-size: 65px;
+    font-size: 8vh;
     text-shadow: rgb(171, 81, 255) 0px 0px 1vw ;
 }
 header h2{
@@ -104,9 +104,8 @@ footer div{
 .container {
     display: grid;
     place-items: center;
-    width: 250px;
-    padding: 60px 0 40px;
-    border-radius: 30px;
+    width: 200px;
+    padding: 40px 0 20px;
     background: #eeeeee00;
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
 }

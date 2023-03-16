@@ -32,7 +32,11 @@ const switchPlayer = () => {
     currentScore[currentPlayerIndex] += currentPendingPoints;
     currentPendingPoints = 0;
     currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
-    currentPlayer.textContent = `${playerNames[currentPlayerIndex].value}'s turn`;
+    if (`${playerNames[currentPlayerIndex].value}` === "") {
+        currentPlayer.textContent = ``;
+    }else{
+        currentPlayer.textContent = `${playerNames[currentPlayerIndex].value}'s turn`;
+    }
     currentScoreOne.textContent = currentScore[0];
     currentScoreTwo.textContent = currentScore[1];
     if (currentScore[(currentPlayerIndex + 1) % 2] >= 100) {
@@ -51,10 +55,16 @@ function resetGame() {
     updatePendingPoint();
     currentScore = [0, 0];
     currentPlayerIndex = 0;
-    currentPlayer.textContent = `${playerNames[currentPlayerIndex].value}'s turn`;
+    if (`${playerNames[currentPlayerIndex].value}` === "") {
+        currentPlayer.textContent = ``;
+    }else{
+        currentPlayer.textContent = `${playerNames[currentPlayerIndex].value}'s turn`;
+    }
+    
     currentScoreOne.textContent = currentScore[0];
     currentScoreTwo.textContent = currentScore[1];
 }
+
 
 const rollDice = () => {
   const random = Math.floor(Math.random() * 6) + 1;
