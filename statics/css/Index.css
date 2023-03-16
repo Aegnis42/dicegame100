@@ -5,6 +5,7 @@
     font: 700 16px 'Montserrat';
 }
 body{
+    height: 100vh;
     background: url(../assets/img/peakpx.jpg);
     background-size: cover;
 
@@ -17,13 +18,13 @@ header h1{
 header h2{
     color: rgb(202, 145, 255);
     font-size: 35px;
-    margin-top: 0.8vw;
+    margin-top: 0.8vh;
     text-shadow: rgb(171, 81, 255) 0px 0px 0.8vw ;
 }
 header div{
     display: flex;
     justify-content: center;
-    margin: 1vw;
+    margin: 1vh;
 
 }
 header div h3{
@@ -38,7 +39,7 @@ button{
     padding: 6px 12px;
     border-radius: 3px;
     border: 2px solid #b33951;
-    transition: .4s;
+    transition: .2s;
     background: rgba(0, 0, 0, 0.712);
     text-shadow: rgb(171, 81, 255) 0px 0px 0vw ;
 }
@@ -48,13 +49,13 @@ button:hover{
 }
 header button{
     font-size: 25px;
-    margin: 25px 0 10px 0;
+    margin: 2.5vh 0 1vh 0;
 }
 main button{
-    margin: 10px;
+    margin: 1vh;
 }
 .roll{
-    margin: 50px 0 15px;
+    margin: 6vh 0 1.5vh;
 }
 main{
     display: flex;
@@ -84,7 +85,7 @@ main section div{
 }
 p{
     color:azure;
-    margin-top: 15px;
+    margin-top: 1.5vh;
     font-weight: bold;
     font-size: 20px;
 }
