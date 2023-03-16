@@ -1,62 +1,126 @@
-const dice = document.getElementsByClassName('dice')[0];
-const rollBtn = document.getElementsByClassName('roll')[0];
+const dice = document.querySelector('.dice');
+const rollBtn = document.querySelector('.roll');
+const startBtn = document.querySelector('#startBtn');
+const container = document.querySelector('.container');
+const currentPlayer = document.querySelector('#currentPlayer');
+const playerOneName = document.querySelector('#playerOneName');
+const playerTwoName = document.querySelector('#playerTwoName');
+const pendingPointsOne = document.querySelector('#pendingPointsOne');
+const stockPointsBtnOne = document.querySelector('#stockPointsBtnOne');
+const currentScoreOne = document.querySelector('#currentScoreOne');
+const pendingPointsTwo = document.querySelector('#pendingPointsTwo');
+const stockPointsBtnTwo = document.querySelector('#stockPointsBtnTwo');
+const currentScoreTwo = document.querySelector('#currentScoreTwo');
+const scoreWinPlayerOne = document.querySelector('#scoreWinPlayerOne');
+const scoreWinPlayerTwo = document.querySelector('#scoreWinPlayerTwo');
 
-const randomDice = () => {
+const playerNames = [playerOneName, playerTwoName];
 
-    const random = Math.floor(Math.random() * 10);
+let currentPlayerIndex = 0;
+let currentPendingPoints = 0;
+let currentScore = [0, 0];
+let wins = [0, 0];
 
-    if (random >= 1 && random <= 6) {
-        rollDice(random);
+const updatePendingPoint = () => {
+  const pendingPoints = currentPlayerIndex === 0 ? pendingPointsOne : pendingPointsTwo;
+  pendingPoints.textContent = currentPendingPoints;
+};
+
+const switchPlayer = () => {
+    currentPendingPoints = 0;
+    updatePendingPoint();
+    currentScore[currentPlayerIndex] += currentPendingPoints;
+    currentPendingPoints = 0;
+    currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+    currentPlayer.textContent = `${playerNames[currentPlayerIndex].value}'s turn`;
+    currentScoreOne.textContent = currentScore[0];
+    currentScoreTwo.textContent = currentScore[1];
+    if (currentScore[(currentPlayerIndex + 1) % 2] >= 100) {
+      wins[(currentPlayerIndex + 1) % 2]++;
+      const scoreWinEl = (currentPlayerIndex + 1) % 2 === 0 ? scoreWinPlayerOne : scoreWinPlayerTwo;
+      scoreWinEl.textContent = wins[(currentPlayerIndex + 1) % 2];
+      currentScoreEl = currentPlayerIndex === 0 ? currentScoreOne : currentScoreTwo;
+      currentScoreEl.textContent = currentScore[currentPlayerIndex];
+
+      resetGame();
     }
-    else {
-        randomDice();
-    }
+  };
+
+function resetGame() {
+    currentPendingPoints = 0;
+    updatePendingPoint();
+    currentScore = [0, 0];
+    currentPlayerIndex = 0;
+    currentPlayer.textContent = `${playerNames[currentPlayerIndex].value}'s turn`;
+    currentScoreOne.textContent = currentScore[0];
+    currentScoreTwo.textContent = currentScore[1];
 }
 
-const rollDice = random => {
+const rollDice = () => {
+  const random = Math.floor(Math.random() * 6) + 1;
 
-    dice.style.animation = 'rolling 4s';
+  dice.style.animation = 'rolling 2s';
 
-    setTimeout(() => {
+  setTimeout(() => {
 
-        switch (random) {
-            case 1:
+      switch (random) {
+          case 1:
                 dice.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                break;
+                switchPlayer();
+              break;
 
-            case 6:
+          case 6:
                 dice.style.transform = 'rotateX(180deg) rotateY(0deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            case 2:
+          case 2:
                 dice.style.transform = 'rotateX(-90deg) rotateY(0deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            case 5:
+          case 5:
                 dice.style.transform = 'rotateX(90deg) rotateY(0deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            case 3:
+          case 3:
                 dice.style.transform = 'rotateX(0deg) rotateY(90deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            case 4:
+          case 4:
                 dice.style.transform = 'rotateX(0deg) rotateY(-90deg)';
-                break;
+                currentPendingPoints += random;
+                updatePendingPoint();
+              break;
 
-            default:
-                break;
-        }
+          default:
+              break;
+      }
 
-        dice.style.animation = 'none';
+      dice.style.animation = 'none';
+    
+}, 2050);
+};
 
-    }, 4050);le jeu es simple il y a 2 joueur 
-    il recuper le resultat du des qui est lqncer dans un autre js
-    le resultat du dé es ajouter a pending point 
-    si le dé fait un pending point es remit a 0 et on passe au joueur suivant 
-    si le joueur click sur stock point pending point et ajouter a stock point et on passe au joueur suivant
-    le premier arriver a 100 stock point gagne la partit et gagne un point de score win
+const updatePendingPoints = () => {
+const pendingPoints = currentPlayerIndex === 0 ? pendingPointsOne : pendingPointsTwo;
+pendingPoints.textContent = currentPendingPoints;
+};
 
-}
+const holdPoints = () => {
+currentScore[currentPlayerIndex] += currentPendingPoints;
+const currentScoreEl = currentPlayerIndex === 0 ? currentScoreOne : currentScoreTwo;
+currentScoreEl.textContent = currentScore[currentPlayerIndex];
+switchPlayer();
+};
 
-rollBtn.addEventListener('click', randomDice);
+rollBtn.addEventListener('click', rollDice);
+startBtn.addEventListener('click', resetGame);
+stockPointsBtnOne.addEventListener('click', holdPoints);
+stockPointsBtnTwo.addEventListener('click', holdPoints);

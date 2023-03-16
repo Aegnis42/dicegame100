@@ -119,7 +119,7 @@ footer div{
     width: 100px;
     height: 100px;
     transform-style: preserve-3d;
-    transition: 1s ease;
+    transition: 1 ease;
 }
 
 @keyframes rolling {
